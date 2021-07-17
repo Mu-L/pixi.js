@@ -51,7 +51,11 @@ const charRenderDataPool: CharRenderData[] = [];
  *
  * ```js
  * // in this case the font is in a file called 'desyrel.fnt'
- * let bitmapText = new PIXI.BitmapText("text using a fancy font!", {font: "35px Desyrel", align: "right"});
+ * let bitmapText = new PIXI.BitmapText("text using a fancy font!", {
+ *   fontName: "Desyrel",
+ *   fontSize: 35,
+ *   align: "right"
+ * });
  * ```
  *
  * @class
@@ -310,8 +314,8 @@ export class BitmapText extends Container
 
             chars.push(charRenderData);
 
+            lastLineWidth = charRenderData.position.x + charData.texture.orig.width;// Use charRenderData position!
             pos.x += charData.xAdvance + this._letterSpacing;
-            lastLineWidth = pos.x;
             maxLineHeight = Math.max(maxLineHeight, (charData.yOffset + charData.texture.height));
             prevCharCode = charCode;
 
